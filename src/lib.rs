@@ -20,6 +20,7 @@ use pin_project::pin_project;
 use std::task::{Context, Poll};
 use std::{future::Future, pin::Pin, task::ready};
 use tower::{Layer, Service};
+use axum::body::Body;
 
 /// The Layer type that implements tower::Layer and is passed into `.layer()`
 pub struct GovernorLayer<'a, K, M>
@@ -160,7 +161,7 @@ enum Kind<F> {
         future: F,
     },
     Error {
-        error_response: Option<Response<String>>,
+        error_response: Option<Response<Body>>,
     },
 }
 
